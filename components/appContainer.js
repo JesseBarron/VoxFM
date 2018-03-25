@@ -8,11 +8,13 @@ import {
     View
 } from 'react-native'
 import { connect } from 'react-redux'
+import VideoPlayer from 'react-native-video-controls'
+
 
 import { fetchFeed, fetchStreamInformation } from '../store'
 import {Header, Player, List} from './index'
 import { colors, dimensions } from '../const'
-import { ShoutStreamer, VideoPlayer } from '../utility'
+import { ShoutStreamer } from '../utility'
 
 const URL = "http://www.indahosting.net:8128/;"
 
