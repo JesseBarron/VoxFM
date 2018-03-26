@@ -23,6 +23,14 @@ class ShoutStreamerIOS: NSObject {
   func initStreamer() -> Bool {
     do {
       try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+      remoteCommand.playCommand.addTarget(self, action: #selector(self.playStream))
+      remoteCommand.pauseCommand.addTarget(self, action: #selector(self.pause))
+      remoteCommand.previousTrackCommand.isEnabled = false
+      remoteCommand.nextTrackCommand.isEnabled = false
+      let infoCenter = MPNowPlayingInfoCenter.default()
+      infoCenter.nowPlayingInfo = [
+        MPMediaItemPropertyTitle: "VoxFM"
+      ]
     } catch {
       NSLog("Did Not Work")
       return false
@@ -43,7 +51,7 @@ class ShoutStreamerIOS: NSObject {
     }
   }
   
-  func playStream() -> Void{
+  func playStream() -> Void {
     do {
       try self.audioSession.setActive(true)
       self.streamer = AVPlayer(url: self.streamURL!)
@@ -53,7 +61,8 @@ class ShoutStreamerIOS: NSObject {
     }
   }
   
-  @objc func pause() {
+  @objc func pause() -> Void {
     self.streamer?.pause()
   }
+  
 }
