@@ -8,8 +8,6 @@ import {
     View
 } from 'react-native'
 import { connect } from 'react-redux'
-import VideoPlayer from 'react-native-video-controls'
-
 
 import { fetchFeed, fetchStreamInformation } from '../store'
 import {Header, Player, List} from './index'
