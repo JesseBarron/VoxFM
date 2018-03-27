@@ -21,5 +21,6 @@ module.exports = {
     client,
     messageService,
     fbFeedService,
-    voxStreamInfo
+    voxStreamInfo,
+    socket
 }

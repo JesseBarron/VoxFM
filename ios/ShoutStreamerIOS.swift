@@ -23,19 +23,17 @@ class ShoutStreamerIOS: NSObject {
   func initStreamer() -> Bool {
     do {
       try audioSession.setCategory(AVAudioSessionCategoryPlayback)
-      remoteCommand.playCommand.addTarget(self, action: #selector(self.playStream))
-      remoteCommand.pauseCommand.addTarget(self, action: #selector(self.pause))
-      remoteCommand.previousTrackCommand.isEnabled = false
-      remoteCommand.nextTrackCommand.isEnabled = false
+      self.configRemote()
+      self.configInfoCenter()
       let infoCenter = MPNowPlayingInfoCenter.default()
       infoCenter.nowPlayingInfo = [
-        MPMediaItemPropertyTitle: "VoxFM"
+        MPMediaItemPropertyTitle: "VoxFM",
       ]
+      return true
     } catch {
       NSLog("Did Not Work")
       return false
     }
-    return true
   }
   
   func setURL(_ url: String) -> Void {
@@ -64,5 +62,22 @@ class ShoutStreamerIOS: NSObject {
   @objc func pause() -> Void {
     self.streamer?.pause()
   }
+  
+  @objc func configInfoCenter(_ title: String = "VoxFM") -> Void {
+    NSLog("String For Information: %@", title)
+    var nowPlayingInfo = [String : Any]()
+    nowPlayingInfo[MPMediaItemPropertyTitle] = title
+    nowPlayingInfo[MPMediaItemPropertyArtist] = "Artist"
+    nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "VoxFM2"
+    MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+  }
+  
+  func configRemote() -> Void {
+    remoteCommand.playCommand.addTarget(self, action: #selector(self.playStream))
+    remoteCommand.pauseCommand.addTarget(self, action: #selector(self.pause))
+    remoteCommand.previousTrackCommand.isEnabled = false
+    remoteCommand.nextTrackCommand.isEnabled = false
+  }
+  
   
 }

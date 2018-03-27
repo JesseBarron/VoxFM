@@ -11,7 +11,7 @@ import {
 import { ShoutStreamer } from '../utility'
 import { colors, dimensions } from '../const'
 
-export default Player = ({play, pause, playerStat, streamInfo}) => {
+export default Player = ({play, pause, playerStat, currentSong}) => {
     return (
         <View style={styles.playerContainer}>
             {
@@ -36,9 +36,9 @@ export default Player = ({play, pause, playerStat, streamInfo}) => {
                   </TouchableOpacity>
             }
             {
-                playerStat &&   
+                (playerStat && currentSong) &&   
                 <View style={styles.currentSongContainer}>
-                    <Text style={styles.currentSong}>{streamInfo.currentSong}</Text>
+                    <Text style={styles.currentSong}>{currentSong}</Text>
                 </View>
             }
         </View>

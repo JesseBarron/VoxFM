@@ -1,39 +1,35 @@
 import { voxStreamInfo } from '../../clientServices'
 
-const initState = {
-    currentSong: '',
-    genre: ''
-}
 
 const GET_STREAM_INFORMATION = 'GET_STREAM_INFORMATION'
 
-const getStreamInformation = ({currentSong, genre}) => ({
+const getStreamInformation = currentSong => ({
     type: GET_STREAM_INFORMATION,
     currentSong,
-    genre
 })
 
 const reducerMethods = {
-    GET_STREAM_INFORMATION(state, {genre, currentSong}) {
-        return Object.assign({}, state, {genre, currentSong})
+    GET_STREAM_INFORMATION(state, { currentSong }) {
+        return currentSong
     }
 }
 
-export default (state= initState, action) => {
+export default (state= '', action) => {
     if (reducerMethods[action.type]) return reducerMethods[action.type](state, action)
     return state
 }
 
+
 export const fetchStreamInformation = () =>
     async dispatch => {
         try {
-            const result = await voxStreamInfo.find()
-            const { currentSong, genre } = result
-            const action = getStreamInformation({ currentSong, genre })
-            console.log(action)
+            const currentSong = await voxStreamInfo.find()
+            const action = getStreamInformation(currentSong)
             dispatch(action)
+            return currentSong
         } catch(err) {
             console.log(err)
         }
     }
+
 

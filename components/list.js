@@ -15,8 +15,9 @@ import { dimensions } from '../const'
         <View style={styles.cardContainer} >
             <View style={styles.messageContainer}>
             <Image 
-                source={require('../assets/vox94_thumb.png')}
-                style={{height: 20, width: 20}}
+                source={require('../assets/voxfmImage.png')}
+                style={{height: 50, width: 50, borderRadius: 25, borderWidth: .23, borderColor: 'black'}}
+                resizeMode={'contain'}
             />
                 <Text>{item.message || 'Siguenos en VoxFM'}</Text>
             </View>
@@ -30,13 +31,13 @@ import { dimensions } from '../const'
                         position: 'absolute',
                         zIndex: -2
                     }}
-                    source= {{uri: thumbnail || '../assets/vox94_thumb.png'}}
+                    source= {{uri: thumbnail || '../assets/voxfmImage.png'}}
                 />
                 <TouchableOpacity activeOpacity={.7} onPress={() => playVid(item.source)} >
                     <Image
                         resizeMode={'contain'}
                         style={{width:'100%', height:'100%'}}
-                        source= {{uri: thumbnail || '../assets/vox94_thumb.png'}}
+                        source= {{uri: thumbnail || '../assets/voxfmImage.png'}}
                     />
                 </TouchableOpacity>
             </View>

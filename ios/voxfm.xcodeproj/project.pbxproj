@@ -48,6 +48,7 @@
 		CA07D128A94A4E0680158247 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A9EF44BE64D4A8689A4BD /* FontAwesome.ttf */; };
 		CBF50D2C481E4C91AFC74D60 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD66738FA0EF40879A85FF00 /* Feather.ttf */; };
 		DD69D130C418493E846D5B5C /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B997D32915EB4A9A94244658 /* Ionicons.ttf */; };
+		E652DED220698ADD00101FA2 /* voxfmImage.png in Resources */ = {isa = PBXBuildFile; fileRef = E652DED120698ADD00101FA2 /* voxfmImage.png */; };
 		E6F769D32068587400BAB7C1 /* ShoutStreamerIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F769D22068587400BAB7C1 /* ShoutStreamerIOS.swift */; };
 		E6F769D52068589D00BAB7C1 /* ShoutStreamerIOSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F769D42068589D00BAB7C1 /* ShoutStreamerIOSBridge.m */; };
 		E7FDB964888A4F6A8E8F7370 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1F771187E24DA9BAB35D44 /* Foundation.ttf */; };
@@ -402,6 +403,7 @@
 		B997D32915EB4A9A94244658 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		BD66738FA0EF40879A85FF00 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		DEA8982D95174400B77962E7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		E652DED120698ADD00101FA2 /* voxfmImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voxfmImage.png; path = ../assets/voxfmImage.png; sourceTree = "<group>"; };
 		E6DDA0B32068627C004328B8 /* voxfm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "voxfm-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6F769D22068587400BAB7C1 /* ShoutStreamerIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoutStreamerIOS.swift; sourceTree = "<group>"; };
 		E6F769D42068589D00BAB7C1 /* ShoutStreamerIOSBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoutStreamerIOSBridge.m; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				E6DDA0B32068627C004328B8 /* voxfm-Bridging-Header.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				E652DED120698ADD00101FA2 /* voxfmImage.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -1230,6 +1233,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				FB01CF1D0CDC4334AD28B7FD /* Entypo.ttf in Resources */,
 				75441A6DBC794A5489F972ED /* EvilIcons.ttf in Resources */,
+				E652DED220698ADD00101FA2 /* voxfmImage.png in Resources */,
 				CBF50D2C481E4C91AFC74D60 /* Feather.ttf in Resources */,
 				CA07D128A94A4E0680158247 /* FontAwesome.ttf in Resources */,
 				E7FDB964888A4F6A8E8F7370 /* Foundation.ttf in Resources */,
@@ -1423,7 +1427,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1452,7 +1456,7 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 38H7V492WB;

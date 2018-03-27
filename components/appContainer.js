@@ -13,6 +13,7 @@ import { fetchFeed, fetchStreamInformation } from '../store'
 import {Header, Player, List} from './index'
 import { colors, dimensions } from '../const'
 import { ShoutStreamer } from '../utility'
+import { socket } from '../clientServices'
 
 const URL = "http://www.indahosting.net:8128/;"
 
@@ -21,6 +22,7 @@ class AppContianer extends Component {
         super(props)
         this.state = {
           playerStat: false,
+          currentSong: ''
         }
       }
 
@@ -28,6 +30,7 @@ class AppContianer extends Component {
      async componentDidMount() {
          this.props.getFeed()
          this.props.getCurrentSong()
+            .then(currentSong => this.setState({ currentSong }))
       }
     
     handlePlay = () => {
@@ -36,6 +39,7 @@ class AppContianer extends Component {
         this.setState({
             playerStat: true
         })
+        ShoutStreamer.configInfoCenter(this.state.currentSong)
     }
 
     handlePause = () => {
@@ -45,21 +49,21 @@ class AppContianer extends Component {
             playerStat: false
         })
     }
-    handlePlayVid = (url) => {
-        console.log('Playing Video')
-        console.log(url)
-        VideoPlayer.play(url)
-    }
+
     render() {
-        let { playerStat } = this.state
-        let { fbFeed, streamInfo } = this.props
+        let { playerStat, currentSong } = this.state
+        let { fbFeed } = this.props
+        socket.on('streamInfo updated', (currentSong) => {
+            ShoutStreamer.configInfoCenter(currentSong)
+            this.setState({ currentSong })
+        })
         return ( 
             <View style={styles.container} >
                 <Header />
                 <ScrollView style={styles.scrollContainer}>                    
                     <List data={fbFeed} playVid={this.handlePlayVid}/>
                 </ScrollView>
-                <Player pause={this.handlePause} play={this.handlePlay} playerStat={playerStat} streamInfo={streamInfo}/>
+                <Player pause={this.handlePause} play={this.handlePlay} playerStat={playerStat} currentSong={currentSong}/>
             </View>
         )
     }
@@ -81,9 +85,9 @@ const styles = StyleSheet.create({
     }
   });
 
-const mapState = ({ fbFeed, streamInfo }) => ({
+const mapState = ({ fbFeed, currentSong }) => ({
     fbFeed,
-    streamInfo
+    currentSong
 })
 
 const mapDispatch = dispatch => ({
