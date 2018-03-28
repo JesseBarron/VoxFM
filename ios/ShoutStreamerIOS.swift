@@ -67,8 +67,8 @@ class ShoutStreamerIOS: NSObject {
     NSLog("String For Information: %@", title)
     var nowPlayingInfo = [String : Any]()
     nowPlayingInfo[MPMediaItemPropertyTitle] = title
-    nowPlayingInfo[MPMediaItemPropertyArtist] = "Artist"
-    nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "VoxFM2"
+//    nowPlayingInfo[MPMediaItemPropertyArtist] = "Artist"
+    nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "VoxFM"
     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
   

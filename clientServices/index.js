@@ -1,8 +1,8 @@
 import io from 'socket.io-client'
 import feathers from '@feathersjs/feathers'
 import socketio from '@feathersjs/socketio-client'
-
-const socket = io('http://localhost:8080/', {
+const localServer = 'http://localhost:8080/'
+const socket = io('https://voxfm-server.herokuapp.com/', {
     transports: ['websocket'],
     forceNew: true,
     pingInterval: 10000,
