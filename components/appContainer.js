@@ -34,7 +34,7 @@ class AppContianer extends Component {
         this.props.getFeed()
         this.props.getCurrentSong()
             .then(currentSong => this.setState({ currentSong }))
-        ShoutStreamer.play(URL)
+        this.handlePlay()
       }
     
     handlePlay = () => {
