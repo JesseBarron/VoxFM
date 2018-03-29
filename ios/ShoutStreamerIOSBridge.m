@@ -14,4 +14,6 @@
 RCT_EXTERN_METHOD(play:(NSString *)url)
 RCT_EXTERN_METHOD(pause)
 RCT_EXTERN_METHOD(configInfoCenter:(NSString *)title)
+RCT_EXTERN_METHOD(setAudioSession:(NSString *)set)
+
 @end

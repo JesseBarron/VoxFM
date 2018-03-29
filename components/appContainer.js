@@ -8,6 +8,7 @@ import {
     View
 } from 'react-native'
 import { connect } from 'react-redux'
+import VideoPlayer from 'react-native-video-controls'
 
 import { fetchFeed, fetchStreamInformation } from '../store'
 import {Header, Player, List} from './index'
@@ -22,15 +23,18 @@ class AppContianer extends Component {
         super(props)
         this.state = {
           playerStat: false,
-          currentSong: ''
+          currentSong: '',
         }
       }
-
+      static navigationOptions = {
+          header: 'none'
+      }
 
      async componentDidMount() {
-         this.props.getFeed()
-         this.props.getCurrentSong()
+        this.props.getFeed()
+        this.props.getCurrentSong()
             .then(currentSong => this.setState({ currentSong }))
+        ShoutStreamer.play(URL)
       }
     
     handlePlay = () => {
@@ -49,10 +53,12 @@ class AppContianer extends Component {
             playerStat: false
         })
     }
-
+    playVideo = () => {
+        this.setState({videoPlayer: flase})
+    }
     render() {
-        let { playerStat, currentSong } = this.state
-        let { fbFeed } = this.props
+        const { playerStat, currentSong, playerRef } = this.state
+        const { fbFeed, navigation } = this.props
         socket.on('streamInfo updated', (currentSong) => {
             ShoutStreamer.configInfoCenter(currentSong)
             this.setState({ currentSong })
@@ -61,9 +67,9 @@ class AppContianer extends Component {
             <View style={styles.container} >
                 <Header />
                 <ScrollView style={styles.scrollContainer}>                    
-                    <List data={fbFeed} playVid={this.handlePlayVid}/>
+                    <List data={fbFeed} pauseStream={this.handlePause} navigation={navigation}/>
                 </ScrollView>
-                <Player pause={this.handlePause} play={this.handlePlay} playerStat={playerStat} currentSong={currentSong}/>
+                <Player pause={this.handlePause} play={this.handlePlay} playerStat={playerStat} currentSong={currentSong} />
             </View>
         )
     }
@@ -82,6 +88,12 @@ const styles = StyleSheet.create({
         height: "96%",
         marginTop: 30,
         zIndex: -2
+    },
+    videoPlayer: {
+        flex: 1,
+        width: '50%',
+        height: '20%',
+        backgroundColor: 'red'
     }
   });
 

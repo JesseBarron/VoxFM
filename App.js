@@ -13,21 +13,14 @@ import { Provider } from 'react-redux'
 import { ShoutStreamer } from './utility'
 import { AppContainer } from './components'
 import store from './store'
+import RootStack from './navigation'
 
 export default class App extends Component {
-  
-  componentDidMount = async () => {
-    try {
-      ShoutStreamer.setupNotificaitons()
-    } catch(err) {
-      console.log(err)
-    }
-  }
-
   render() {
     return (
       <Provider store={store}>
-        <AppContainer />
+        {/* <AppContainer /> */}
+        <RootStack />
       </Provider>
     );
   }

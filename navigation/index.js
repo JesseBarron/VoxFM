@@ -1,9 +1,14 @@
-import { Navigation } from 'react-native-navigation'
+import { StackNavigator } from 'react-navigation'
 
+import { AppContainer, VideoPlayer } from '../components'
 import LandingPage from './landing'
 import Page2 from './page2'
 
-export function registerScreens() {
-    Navigation.registerComponent('main.landing', () => LandingPage)
-    // Navigation.registerComponent('main.page2', () => Page2)
-}
+export default RootStack = StackNavigator({
+    Home: {
+        screen: AppContainer
+    },
+    VideoPlayer: {
+        screen: VideoPlayer
+    }
+})

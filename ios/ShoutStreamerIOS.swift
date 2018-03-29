@@ -23,6 +23,7 @@ class ShoutStreamerIOS: NSObject {
   func initStreamer() -> Bool {
     do {
       try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+      
       self.configRemote()
       self.configInfoCenter()
       let infoCenter = MPNowPlayingInfoCenter.default()
@@ -48,15 +49,25 @@ class ShoutStreamerIOS: NSObject {
       self.playStream()
     }
   }
-  
-  func playStream() -> Void {
+  @objc func setAudioSession(_ set: String) -> Bool {
+    let activate = set == "enable"
     do {
-      try self.audioSession.setActive(true)
-      self.streamer = AVPlayer(url: self.streamURL!)
-      self.streamer?.play()
+      try self.audioSession.setActive(activate)
+      NSLog("AudioSessionSet")
+      return true
     } catch {
       NSLog("Session could not be set to active")
+      return false
     }
+  }
+  func playStream() -> Void {
+    if self.setAudioSession("enable") {
+        self.streamer = AVPlayer(url: streamURL!)
+        self.streamer?.play()
+    } else {
+      NSLog("Session Failed to Activate")
+    }
+    
   }
   
   @objc func pause() -> Void {
@@ -67,7 +78,6 @@ class ShoutStreamerIOS: NSObject {
     NSLog("String For Information: %@", title)
     var nowPlayingInfo = [String : Any]()
     nowPlayingInfo[MPMediaItemPropertyTitle] = title
-//    nowPlayingInfo[MPMediaItemPropertyArtist] = "Artist"
     nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "VoxFM"
     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
