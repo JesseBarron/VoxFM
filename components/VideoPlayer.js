@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import VideoPlayer from 'react-native-video-controls'
+// import Orientation from 'react-native-orientation'
 import {
     View,
     Text,
@@ -11,7 +12,13 @@ export default class VideoPlayerComponent extends Component {
     constructor(props) {
         super(props)
     }
-
+    // componentDidMount(){
+    //     Orientation.unlockAllOrientations()
+    // }
+    onBack = () => {
+        // Orientation.lockToPortrait()
+        this.props.navigation.goBack()
+    }
     static navigationOptions = {
         header: 'none'
     }
@@ -24,9 +31,9 @@ export default class VideoPlayerComponent extends Component {
                 <VideoPlayer
                 paused={false} 
                 style= {styles.videoPlayer}
-                navigator={ navigation }
                 source={{uri: source}} 
-                onEnd={() => navigation.goBack()}    
+                onEnd={() => this.onBack()}   
+                onBack={() => this.onBack()} 
             />                    
             </View>
         )

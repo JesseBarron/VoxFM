@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux'
 import VideoPlayer from 'react-native-video-controls'
 
+
 import { fetchFeed, fetchStreamInformation } from '../store'
 import {Header, Player, List} from './index'
 import { colors, dimensions } from '../const'
@@ -30,12 +31,12 @@ class AppContianer extends Component {
           header: 'none'
       }
 
-     async componentDidMount() {
+    async componentDidMount() {
         this.props.getFeed()
         this.props.getCurrentSong()
             .then(currentSong => this.setState({ currentSong }))
         this.handlePlay()
-      }
+    }
     
     handlePlay = () => {
         console.log('Play')
@@ -43,7 +44,7 @@ class AppContianer extends Component {
         this.setState({
             playerStat: true
         })
-        ShoutStreamer.configInfoCenter(this.state.currentSong)
+
     }
 
     handlePause = () => {
@@ -63,6 +64,7 @@ class AppContianer extends Component {
             ShoutStreamer.configInfoCenter(currentSong)
             this.setState({ currentSong })
         })
+        ShoutStreamer.configInfoCenter(this.state.currentSong || 'VoxFM')
         return ( 
             <View style={styles.container} >
                 <Header />
