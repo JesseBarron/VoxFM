@@ -14,8 +14,8 @@ import { ShoutStreamer } from '../utility'
 import { _AppContainerStyle } from './_styles'
 import { fetchFeed, fetchCurrentSong } from '../store'
 import {
-    Header,
     Feed,
+    Header,
     StreamPlayer
 } from '../component'
 
@@ -31,6 +31,7 @@ class AppContainer extends Component {
     static navigationOptions = {
         header: null
     }
+
     componentDidMount() {
         this.props.fetchFeed()
         this.props.fetchCurrentSong()
@@ -69,8 +70,7 @@ class AppContainer extends Component {
         this.setState({ playerStat: false })
     }
     render() {
-        const { fbFeed, navigation } = this.props
-        const { feed, nextPage } = fbFeed
+        const {feed, nextPage, navigation } = this.props
         const { playerStat, currentSong } = this.state
         const OS = Platform.OS
         socket.on('streamInfo updated', (currentSong) => {
@@ -86,14 +86,11 @@ class AppContainer extends Component {
                     <Header goTo={this.goTo}/>
                 </View>
                 <View style={{flex: OS == 'ios' ? 8 : 10}} >
-                    <ScrollView  >
-                        <Feed 
-                            feed={feed} 
+                        <Feed
                             navigation={navigation}
                             play={this.onPlay}
                             pause={this.onPause}
                         />
-                    </ScrollView>
                 </View>
                 <View style={{flex: 1}} >
                     <StreamPlayer 
@@ -111,13 +108,14 @@ class AppContainer extends Component {
 const styles = _AppContainerStyle
 
 const mapState = ({fbFeed, currentSong}) => ({
-    fbFeed,
+    feed: fbFeed.feed,
+    nextPage: fbFeed.nextPage,
     currentSong
 })
 
 const mapDispatch = (dispatch) => ({
-   async fetchFeed() {
-        let action = fetchFeed()
+   async fetchFeed(url) {
+        let action = fetchFeed(url)
         return dispatch(action)
     },
    async fetchCurrentSong() {

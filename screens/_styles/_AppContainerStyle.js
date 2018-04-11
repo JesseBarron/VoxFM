@@ -10,7 +10,7 @@ export default styles = StyleSheet.create({
     container: {
         flex: 1,
         display: 'flex',
-        backgroundColor: colors.bkgrPurple,
+        backgroundColor: colors.yellow,
         top: Platform.OS == 'ios' ? 20 : 0
     }
 })

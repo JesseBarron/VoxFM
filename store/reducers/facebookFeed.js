@@ -1,15 +1,17 @@
-import { fbFeedService } from '../../clientServices'
+import {
+    fbFeedService
+} from '../../clientServices'
 
 
 const initState = {
     feed: [],
-    nextPage: '' 
+    nextPage: ''
 }
 /**
  * Actions
  */
 const GET_FEED = 'GET_FEED'
-
+const UPDATE_FEED = "UPDATE_FEED"
 
 /**
  * ActionCreators
@@ -20,6 +22,10 @@ export const getFeed = (feed) => ({
     feed
 })
 
+export const updateFeed = (feed) => ({
+    type: UPDATE_FEED,
+    feed
+})
 
 /**
  * Reducer and methods
@@ -27,16 +33,28 @@ export const getFeed = (feed) => ({
 
 const reduceMethods = {
     GET_FEED(state, action) {
-        let { feed, nextPage } = action.feed
-        return Object.assign(state, action.feed)
+        let {
+            feed,
+            nextPage
+        } = action.feed
+        state.feed = [...state.feed,...feed]
+        state.nextPage = nextPage
+        return state
+    },
+    UPDATE_FEED(state, action) {
+        let {
+            feed,
+            nextPage
+        } = action.feed
+        return Object.assign({}, state, [...state.feed, ...feed], nextPage)
     }
 }
 
 export default (state = initState, action) => {
     let newState = Object.assign({}, state)
     let type = action.type
-    if(reduceMethods[type]) {
-       return reduceMethods[type](newState, action)
+    if (reduceMethods[type]) {
+        return reduceMethods[type](newState, action)
     }
     return state
 }
@@ -45,9 +63,11 @@ export default (state = initState, action) => {
  * Thunks
  */
 
-export const fetchFeed = () =>
-   async dispatch => {
-        let feed = await fbFeedService.find()
+export const fetchFeed = (url) =>
+    async dispatch => {
+        console.log(url)
+        let feed = await fbFeedService.find({query:{url}})
         let action = getFeed(feed)
         dispatch(action)
+        return feed
     }

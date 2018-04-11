@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 
 export default StreamPlayer = ({ play, pause, isPlaying, currentSong }) => {
-    console.log(isPlaying)
     return(
         <View style={styles.container}>
         <View>

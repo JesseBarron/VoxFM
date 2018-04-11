@@ -16,7 +16,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems:'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0, 0.7)'
+        backgroundColor: 'rgba(0,0,0, 0.9)'
     },
     
 })

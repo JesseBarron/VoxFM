@@ -10,7 +10,8 @@ export default StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'rgba(255,255,255,0.3)'
+        backgroundColor: "#222222"
+
     },
     logoContianer: {
         flex: 2,

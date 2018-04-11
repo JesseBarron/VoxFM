@@ -23,21 +23,21 @@ describe('fbFeed Thunks', () => {
     const store = mockStore({
         fbFeed: {}
     })
-    it('Should use the GET_FEED Action', () => {
+    it('fetchFeed Should use the GET_FEED Action', () => {
         return store.dispatch(fetchFeed())
             .then(() => {
                 expect(store.getActions()[0].type)
                     .toEqual("GET_FEED")
             })
     })
-    it('Should Have Feed object with feed Array', () => {
+    it('fetchFeed Should Have Feed object with feed Array', () => {
         return store.dispatch(fetchFeed())
             .then(() => {
                 expect(Array.isArray(store.getActions()[0].feed.feed))
                     .toBe(true)
             })
     })
-    it('Should have a feed object with a nextPage String', () => {
+    it('fetchFeed Should have a feed object with a nextPage String', () => {
         return store.dispatch(fetchFeed())
             .then(() => {
                 expect(typeof store.getActions()[0].feed.nextPage)
