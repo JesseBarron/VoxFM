@@ -21,6 +21,11 @@ const Feed = ({feed, nextPage, updateFeed, navigation, play, pause}) => {
                     console.log('end Reached', x)
                     updateFeed(nextPage)
                 }} 
+                scrollEventThrottle={50}
+                onScroll={(e) => {
+                    e.preventDefault()
+                    console.log(e)
+                }}
                 keyExtractor = {(item, index) => index}
                 renderItem = {({ item }) => <Card item={item} navigation={navigation} play={play} pause={pause}/>}
             />
