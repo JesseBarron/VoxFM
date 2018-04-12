@@ -24,12 +24,12 @@ export default StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginRight: 20
+        marginRight: 20,
     },
     callBttn: {
-        right: 3,
+        right: 6,
         margin: 5,
-        padding: 8,
+        padding: 5,
         backgroundColor: colors.yellow,
         borderRadius: 70, 
 
