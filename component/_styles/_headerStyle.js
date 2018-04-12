@@ -10,11 +10,10 @@ export default StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: "#222222"
-
+        backgroundColor: colors.headerBlack,
     },
     logoContianer: {
-        flex: 2,
+        flex: 1,
     },
     logo: {
         flex: 1,
@@ -22,6 +21,17 @@ export default StyleSheet.create({
     },
     socials: {
         flex: 1,
-        marginRight: 20
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginRight: 20,
+    },
+    callBttn: {
+        right: 6,
+        margin: 5,
+        padding: 5,
+        backgroundColor: colors.yellow,
+        borderRadius: 70, 
+
     }
 })

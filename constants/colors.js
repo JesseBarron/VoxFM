@@ -3,5 +3,6 @@ export default {
     yellow: '#FC9700',
     red: '#D7422A',
     blue: '#5894d8',
-    hotpink: '#C7367D'
+    hotpink: '#C7367D',
+    headerBlack: '#222222'
 }

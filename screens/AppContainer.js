@@ -4,7 +4,9 @@ import Orientation from 'react-native-orientation'
 import {
     View,
     Text,
+    Easing,
     Linking,
+    Animated,
     Platform,
     StyleSheet,
     ScrollView
@@ -25,9 +27,12 @@ class AppContainer extends Component {
         super()
         this.state = {
             playerStat: false,
+            slide: new Animated.Value(2.9),
+            fade: new Animated.Value(1),
             currentSong: 'VoxFM'
         }
     }
+
     static navigationOptions = {
         header: null
     }
@@ -51,6 +56,43 @@ class AppContainer extends Component {
             Linking.openURL('https://www.instagram.com/vox94radio/')
             case 'voxfm': 
             Linking.openURL('https://somosvoxfm.com/')
+        }
+    }
+    hideHead = (direction) => {
+        if(direction == 'up') {
+            Animated.sequence([
+                Animated.timing(
+                    this.state.slide,
+                    {
+                        toValue: 0,
+                        duration: 1000,
+                    }
+                ),
+                Animated.timing(
+                    this.state.fade,
+                    {
+                        toValue: 0,
+                        duration: 200,
+                    }
+                ),
+            ]).start()
+        } else {
+            Animated.sequence([
+                Animated.timing(
+                    this.state.slide,
+                    {
+                        toValue: 2,
+                        duration: 1000,
+                    }
+                ),
+                Animated.timing(
+                    this.state.fade,
+                    {
+                        toValue: 1,
+                        duration: 2000,
+                    }
+                ),
+            ]).start()
         }
     }
     playVid = () => {
@@ -82,12 +124,15 @@ class AppContainer extends Component {
         })
         return(
             <View style={styles.container}>
-                <View style={{flex: 2}}>
-                    <Header goTo={this.goTo}/>
-                </View>
+                <Animated.View style={{flex: this.state.slide, opacity: this.state.slide}}>
+                    <View style={{flex: 2}}>
+                        <Header goTo={this.goTo}/>
+                    </View>
+                </Animated.View>
                 <View style={{flex: OS == 'ios' ? 8 : 10}} >
                         <Feed
                             navigation={navigation}
+                            hideHead={this.hideHead}
                             play={this.onPlay}
                             pause={this.onPause}
                         />
