@@ -3,6 +3,7 @@ package com.voxfm;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.session.MediaSession;
 import android.util.Log;
 
 import com.facebook.react.bridge.NativeModule;
@@ -19,6 +20,7 @@ public class ShoutStreamerAndroid extends ReactContextBaseJavaModule {
     private String streamURL = null;
     private MediaPlayer mediaPlayer = null;
     private AudioManager mAudioManager;
+    private MediaSession mMediaSession;
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {

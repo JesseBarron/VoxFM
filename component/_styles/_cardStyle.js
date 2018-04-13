@@ -8,11 +8,21 @@ const OS = Platform.OS
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#f8f8f8',
         margin: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        overflow: 'hidden'
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: {width:0,height: 2},
+                shadowOpacity: .8,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 5
+            }
+        })
     },
     messageContainer: {
         display: 'flex',
@@ -35,10 +45,11 @@ export default StyleSheet.create({
         marginBottom: 10
     },
     backgroundImage: {
-        width: 620,
-        height: 500,
+        width: '84%',
+        height: '99%',
+        overflow: 'hidden',
         position: 'absolute',
-        zIndex: -2,
+        zIndex: -5,
     },
     thumbnailImage: {
         flex: 1,

@@ -34,7 +34,7 @@ class Feed extends Component {
                     onEndReached = {() =>  updateFeed(nextPage) }
                     scrollEventThrottle={5000}
                     onScroll={e => this.hideHead(e)}
-                    keyExtractor = {(item, index) => index}
+                    keyExtractor = {(item, index) => item.id}
                     renderItem = {({ item }) => <Card item={item} navigation={navigation} play={play} pause={pause}/>}
                 />
 

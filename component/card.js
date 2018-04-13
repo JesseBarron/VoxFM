@@ -26,12 +26,14 @@ export default Card = ({ item, navigation, play, pause }) => {
                 <Text>{item.message || 'Sigenos en VoxFM'}</Text>
             </View>
             <View style={styles.videoContainer} > 
-                <Image
-                    style={styles.backgroundImage}
-                    source={thumbnail ? {uri: thumbnail} : require('../assets/voxfmImage.png')}
-                    resizeMode={'cover'}
-                    blurRadius={OS == 'ios' ? 10 : 4}
-                />
+                <View  style={styles.backgroundImage}>
+                    <Image
+                        style={{height:'100%', width:'100%'}}
+                        source={thumbnail ? {uri: thumbnail} : require('../assets/voxfmImage.png')}
+                        resizeMode={'cover'}
+                        blurRadius={OS == 'ios' ? 10 : 4}
+                    />
+                </View>
                 <View style={styles.thumbnailImage}>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -42,7 +44,7 @@ export default Card = ({ item, navigation, play, pause }) => {
                     >
                         <Image 
                             resizeMode={'contain'}
-                            style={{height: '100%', width: '100%'}}
+                            style={{height: '99%', width: '100%'}}
                             source={thumbnail ? {uri: thumbnail} : require('../assets/voxfmImage.png')}
                         />
                     </TouchableOpacity>
