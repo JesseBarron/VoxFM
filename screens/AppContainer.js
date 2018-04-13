@@ -1,5 +1,6 @@
 import React,{ Component } from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import Orientation from 'react-native-orientation'
 import {
     View,
@@ -11,6 +12,7 @@ import {
     StyleSheet,
     ScrollView
 } from 'react-native'
+
 import { socket } from '../clientServices'
 import { ShoutStreamer } from '../utility'
 import { _AppContainerStyle } from './_styles'
@@ -41,9 +43,19 @@ class AppContainer extends Component {
         this.props.fetchFeed()
         this.props.fetchCurrentSong()
             .then(currentSong => this.setState({currentSong}))
+        this.registerSongUpdateListener()
         Orientation.lockToPortrait()
     }
-
+    registerSongUpdateListener = () => {
+        const OS = Platform.OS
+        socket.on('streamInfo updated', (currentSong) => {
+            console.log("Socket Updated", currentSong)
+            if(OS == 'ios') {
+                ShoutStreamer.configInfoCenter(currentSong, "VoxFM")
+            } 
+            this.props.fetchCurrentSong(currentSong)
+        })
+    }
     goTo = (site) => {
         switch(site) {
             case 'twitter':
@@ -111,17 +123,11 @@ class AppContainer extends Component {
         ShoutStreamer.pause()
         this.setState({ playerStat: false })
     }
+    
     render() {
-        const {feed, nextPage, navigation } = this.props
-        const { playerStat, currentSong } = this.state
+        const {feed, nextPage, navigation, currentSong } = this.props
+        const { playerStat } = this.state
         const OS = Platform.OS
-        socket.on('streamInfo updated', (currentSong) => {
-            console.log("Socket Updated", currentSong)
-            if(OS == 'ios') {
-                ShoutStreamer.configInfoCenter(currentSong, "VoxFM")
-            } 
-            this.setState({currentSong})
-        })
         return(
             <View style={styles.container}>
                 <Animated.View style={{flex: this.state.slide, opacity: this.state.slide}}>
@@ -166,7 +172,7 @@ const mapDispatch = (dispatch) => ({
    async fetchCurrentSong() {
         let action = fetchCurrentSong()
         return dispatch(action)
-    }
+    },
 })
 
 export default connect(mapState, mapDispatch)(AppContainer)

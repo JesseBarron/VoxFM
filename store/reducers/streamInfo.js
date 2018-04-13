@@ -1,6 +1,11 @@
+import { Platform } from 'react-native'
+import _ from 'lodash'
+import {ShoutStreamer} from '../../utility'
+import { socket } from '../../clientServices'
 import {
     voxInfoService
 } from '../../clientServices'
+
 
 /**
  * ACTIONS
@@ -37,10 +42,20 @@ export default (state = 'VoxFM', action) => {
 /**
  * TUNKS
  */
-export const fetchCurrentSong = () =>
+export const fetchCurrentSong = (currentSong) =>
     async dispatch => {
-        let currentSong = await voxInfoService.find()
-        let action = getCurrentSong(currentSong)
-        dispatch(action)
-        return currentSong
+        try{
+            let currentSong = currentSong || await voxInfoService.find()
+            let action = getCurrentSong(currentSong)
+            dispatch(action)
+            return currentSong
+        } catch(e) {
+            console.error(e)
+        }
     }
+
+// export const listenForSongUpdate = () => {
+//     const OS = Platform.OS
+//     console.log('registered listener')
+    
+// }
