@@ -17,7 +17,7 @@ export default SocialButtons = ({goTo}) => {
                 <Icon name='twitter-with-circle' size={30} color={'#1DA1F2'}></Icon>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => goTo('facebook')} >
-                <Icon name='facebook-with-circle' size={50} color={'#4267B2'}></Icon>
+                <Icon name='facebook-with-circle' size={40} color={'#4267B2'}></Icon>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => goTo('instagram')} >
                 <Icon name='instagram-with-circle' size={30} color={color.red}></Icon>

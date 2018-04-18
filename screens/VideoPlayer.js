@@ -17,8 +17,11 @@ export default class VideoPlayerComponent extends Component {
         header: false
     }
     onBack = () => {
+        const wasPlaying = this.props.navigation.state.params.isPlaying
         this.props.navigation.goBack()
-        this.props.navigation.state.params.play()
+        if(wasPlaying) {
+            this.props.navigation.state.params.play()
+        }
     }
     render() {
         const { source } = this.props.navigation.state.params

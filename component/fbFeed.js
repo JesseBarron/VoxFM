@@ -23,7 +23,7 @@ class Feed extends Component {
     } 
 
     render(){
-        const {feed, nextPage, hideHead, navigation, updateFeed, play, pause} = this.props
+        const {feed, nextPage, hideHead, navigation, updateFeed, play, pause, isPlaying} = this.props
         return (
             <View>
             {
@@ -35,7 +35,14 @@ class Feed extends Component {
                     scrollEventThrottle={5000}
                     onScroll={e => this.hideHead(e)}
                     keyExtractor = {(item, index) => item.id}
-                    renderItem = {({ item }) => <Card item={item} navigation={navigation} play={play} pause={pause}/>}
+                    renderItem = {({ item }) => 
+                    <Card 
+                        item={item} 
+                        navigation={navigation} 
+                        play={play} 
+                        pause={pause}
+                        isPlaying={isPlaying}
+                    />}
                 />
 
             }

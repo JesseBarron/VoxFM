@@ -25,15 +25,15 @@ export default StyleSheet.create({
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
+        flexWrap: 'nowrap',
         alignItems: 'center',
         marginRight: 20,
     },
     callBttn: {
-        right: 6,
-        margin: 5,
+        right: 5,
+        margin: 2,
         padding: 5,
         backgroundColor: colors.yellow,
         borderRadius: 70, 
-
     }
 })

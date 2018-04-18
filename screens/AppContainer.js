@@ -124,7 +124,9 @@ class AppContainer extends Component {
         ShoutStreamer.play(URL)
         const {currentSong} = this.props
         this.setState({playerStat: true})
-        this.registerSongUpdateListener(currentSong)
+        if(Platform.OS == 'ios') {
+            this.registerSongUpdateListener(currentSong)
+        }
     }
 
     onPause = () => {
@@ -149,6 +151,7 @@ class AppContainer extends Component {
                             hideHead={this.hideHead}
                             play={this.onPlay}
                             pause={this.onPause}
+                            isPlaying={playerStat}
                         />
                 </View>
                 <View style={{flex: 1.3}} >

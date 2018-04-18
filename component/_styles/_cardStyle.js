@@ -39,7 +39,7 @@ export default StyleSheet.create({
                 shadowRadius: 3,
             },
             android: {
-                elevation: 5
+                elevation: 1
             }
         }),
         margin: 15,
@@ -52,7 +52,14 @@ export default StyleSheet.create({
         padding: 10
     },
     text: {
-        fontFamily: 'PingFang HK',
+        ...Platform.select({
+            ios: {
+                fontFamily: "PingFang HK"
+            },
+            android: {
+                fontFamily: 'Roboto'
+            }
+        }),
         fontSize: 15
     },
     videoContainer: {

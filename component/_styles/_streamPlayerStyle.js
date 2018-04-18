@@ -16,5 +16,29 @@ export default StyleSheet.create({
     },
     songInfo: {
         marginLeft: 10
+    },
+    artistName: {
+        color: color.yellow,
+        ...Platform.select({
+            ios: {
+                fontFamily: 'Heiti SC',
+            },
+            android: {
+                fontFamily: 'sans-serif-medium'
+            }
+        }),
+        fontSize: 15
+    },
+    songTitle: {
+        color: color.blue,
+        ...Platform.select({
+            ios: {
+                fontFamily: 'Heiti SC',
+            },
+            android: {
+                fontFamily: 'Roboto'
+            }
+        }),
+        fontSize: 15
     }
 })

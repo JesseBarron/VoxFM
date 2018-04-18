@@ -9,7 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-export default Card = ({ item, navigation, play, pause }) => {
+export default Card = ({ item, navigation, play, pause, isPlaying }) => {
     const thumbnail = item.attachments.data[0].media.image.src 
             ? item.attachments.data[0].media.image.src 
             : null
@@ -40,7 +40,7 @@ export default Card = ({ item, navigation, play, pause }) => {
                     <TouchableOpacity
                         activeOpacity={.7}
                         onPress={() => {
-                            navigation.navigate('VideoPlayer',{ source, play }),
+                            navigation.navigate('VideoPlayer',{ source, play, isPlaying }),
                             pause()
                         }}
                     >
