@@ -29,7 +29,7 @@ class AppContainer extends Component {
         super()
         this.state = {
             playerStat: false,
-            slide: new Animated.Value(2.9),
+            slide: new Animated.Value(2),
             fade: new Animated.Value(1),
             currentSong: 'VoxFM'
         }
@@ -42,19 +42,25 @@ class AppContainer extends Component {
     componentDidMount() {
         this.props.fetchFeed()
         this.props.fetchCurrentSong()
-            .then(currentSong => this.setState({currentSong}))
-        this.registerSongUpdateListener()
+            .then(currentSong => {
+                this.setState({currentSong})
+            })
         Orientation.lockToPortrait()
     }
-    registerSongUpdateListener = () => {
+    registerSongUpdateListener = (currentSong) => {
         const OS = Platform.OS
-        socket.on('streamInfo updated', (currentSong) => {
-            console.log("Socket Updated", currentSong)
-            if(OS == 'ios') {
-                ShoutStreamer.configInfoCenter(currentSong, "VoxFM")
-            } 
-            this.props.fetchCurrentSong(currentSong)
-        })
+        if(currentSong){
+            console.log('song Updated', currentSong)
+            ShoutStreamer.configInfoCenter(currentSong)
+        } else {
+            socket.on('streamInfo updated', (currentSong) => {
+                console.log("Socket Updated", currentSong)
+                if(OS == 'ios') {
+                    ShoutStreamer.configInfoCenter(currentSong)
+                } 
+                this.props.fetchCurrentSong(currentSong)
+            })
+        }
     }
     goTo = (site) => {
         switch(site) {
@@ -116,7 +122,9 @@ class AppContainer extends Component {
     }
     onPlay = () => {
         ShoutStreamer.play(URL)
+        const {currentSong} = this.props
         this.setState({playerStat: true})
+        this.registerSongUpdateListener(currentSong)
     }
 
     onPause = () => {
@@ -131,7 +139,7 @@ class AppContainer extends Component {
         return(
             <View style={styles.container}>
                 <Animated.View style={{flex: this.state.slide, opacity: this.state.slide}}>
-                    <View style={{flex: 2}}>
+                    <View style={{flex: 1}}>
                         <Header goTo={this.goTo}/>
                     </View>
                 </Animated.View>
@@ -143,7 +151,7 @@ class AppContainer extends Component {
                             pause={this.onPause}
                         />
                 </View>
-                <View style={{flex: 1}} >
+                <View style={{flex: 1.3}} >
                     <StreamPlayer 
                         play={this.onPlay}
                         pause={this.onPause}

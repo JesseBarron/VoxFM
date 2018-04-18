@@ -18,12 +18,14 @@ export default Card = ({ item, navigation, play, pause }) => {
     return(
         <View style={styles.container} >
             <View style={styles.messageContainer}>
-                <Image
+                {/* <Image
                     source={require('../assets/voxfmImage.png')}
                     style={styles.profileImage}
                     resizeMode={'center'}
-                />
-                <Text>{item.message || 'Sigenos en VoxFM'}</Text>
+                /> */}
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>{item.message || 'Sigenos en VoxFM'}</Text>
+                </View>
             </View>
             <View style={styles.videoContainer} > 
                 <View  style={styles.backgroundImage}>

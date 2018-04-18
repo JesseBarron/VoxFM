@@ -29,6 +29,8 @@ export default class VideoPlayerComponent extends Component {
                     onEnd={() => this.onBack()}
                     onBack={() => this.onBack()}
                     source={{uri: source}}
+                    ignoreSilentSwitch={'ignore'}
+                    playInBackground={false}
                 />
             </View>
         )

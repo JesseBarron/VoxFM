@@ -12,5 +12,5 @@
 @interface RCT_EXTERN_MODULE(ShoutStreamerIOS, NSObject)
 RCT_EXTERN_METHOD(play:(NSString *)url)
 RCT_EXTERN_METHOD(pause)
-RCT_EXTERN_METHOD(configInfoCenter:(NSString *)title station:(NSString *)station)
+RCT_EXTERN_METHOD(configInfoCenter:(NSString *))
 @end

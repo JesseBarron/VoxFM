@@ -10,25 +10,28 @@ import {
 } from 'react-native'
 
 export default StreamPlayer = ({ play, pause, isPlaying, currentSong }) => {
+        const splitSong = currentSong.split(' - ')
+        const [artist, song] = splitSong
     return(
         <View style={styles.container}>
-        <View>
+            <View style={styles.button}>
+                {
+                    isPlaying 
+                    ?<TouchableOpacity onPress={pause} >
+                        <Icon name="pause-circle-outline" size={50} color={color.backgroundGrey} />
+                    </TouchableOpacity>
+                    :<TouchableOpacity onPress={play} >
+                        <Icon name="play-circle-outline" size={50} color={color.backgroundGrey} />
+                    </TouchableOpacity>
+                }
+            </View>        
             {
-                isPlaying 
-                ?<TouchableOpacity onPress={pause} >
-                    <Icon name="pause-circle-outline" size={49} color={color.blue} />
-                </TouchableOpacity>
-                :<TouchableOpacity onPress={play} >
-                    <Icon name="play-circle-outline" size={49} color={color.blue} />
-                </TouchableOpacity>
+                (isPlaying && currentSong) &&
+                <View style={styles.songInfo}>
+                    <Text style={{color: color.yellow, fontFamily:'Heiti SC', fontSize: 15}}> { `${artist} -` } </Text>                
+                    <Text style={{color: color.blue, fontFamily:'Heiti SC', fontSize: 15}}> { `   ${song}` } </Text>
+                </View>
             }
-        </View>        
-        {
-            (isPlaying && currentSong) &&
-            <View>
-                <Text style={{color: color.yellow}}> { currentSong } </Text>
-            </View>
-        }
         </View>
     )
 }
