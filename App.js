@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import color from './constants/colors'
 import RootStack from './navigation'
 import { Provider } from 'react-redux'
 import store from './store'
@@ -19,7 +20,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RootStack />
+        <View style={styles.container}>
+          <RootStack />
+        </View>
       </Provider>
     );
   }
@@ -27,10 +30,8 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flex: 1,
+    backgroundColor: color.headerBlack,
   },
   welcome: {
     fontSize: 20,

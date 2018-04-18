@@ -8,10 +8,11 @@ const OS = Platform.OS
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#fff9f2',
         margin: 10,
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 2,        
         ...Platform.select({
             ios: {
                 shadowColor: 'black',
@@ -26,9 +27,33 @@ export default StyleSheet.create({
     },
     messageContainer: {
         display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: '100%', 
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: .5,
+                shadowRadius: 3,
+            },
+            android: {
+                elevation: 5
+            }
+        }),
+        margin: 15,
         padding: 15
+    },
+    textContainer: {
+        backgroundColor: '#e5e0da',
+        width: '100%',
+        borderRadius: 2,
+        padding: 10
+    },
+    text: {
+        fontFamily: 'PingFang HK',
+        fontSize: 15
     },
     videoContainer: {
         flex: 1,
@@ -37,11 +62,9 @@ export default StyleSheet.create({
         width: 420,
     },
     profileImage: {
-        height: 50, 
-        width: 50, 
-        borderRadius: 23, 
-        borderWidth: .23, 
-        borderColor: 'black', 
+        height: 80, 
+        width: 80, 
+        borderRadius: 40, 
         marginBottom: 10
     },
     backgroundImage: {

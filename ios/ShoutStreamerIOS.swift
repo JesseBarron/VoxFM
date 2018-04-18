@@ -62,11 +62,11 @@ class ShoutStreamerIOS: NSObject {
     self.streamer?.pause()
   }
   
-  @objc func configInfoCenter(_ title: String = "VoxFM", station: String = "VoxFM") -> Void {
+  @objc func configInfoCenter(_ title: String = "VoxFM") -> Void {
     NSLog("Song Title for InfoCenter: %@", title)
     var nowPlayingInfo = [String: Any]()
     nowPlayingInfo[MPMediaItemPropertyTitle] = title
-    nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = station
+    nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "VoxFM"
     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
   

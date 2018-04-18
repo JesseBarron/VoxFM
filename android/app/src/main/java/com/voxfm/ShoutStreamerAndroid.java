@@ -3,8 +3,9 @@ package com.voxfm;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.session.MediaSession;
+import android.os.PowerManager;
 import android.util.Log;
+import android.support.v4.media.session.MediaSessionCompat;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -20,7 +21,6 @@ public class ShoutStreamerAndroid extends ReactContextBaseJavaModule {
     private String streamURL = null;
     private MediaPlayer mediaPlayer = null;
     private AudioManager mAudioManager;
-    private MediaSession mMediaSession;
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
@@ -68,6 +68,7 @@ public class ShoutStreamerAndroid extends ReactContextBaseJavaModule {
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             if (this.mediaPlayer == null) {
                 this.mediaPlayer = new MediaPlayer();
+                this.mediaPlayer.setWakeMode(getReactApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
                 this.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 this.mediaPlayer.setDataSource(this.streamURL);
                 this.mediaPlayer.prepareAsync();

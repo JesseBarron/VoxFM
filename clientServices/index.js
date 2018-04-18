@@ -7,7 +7,7 @@ const OS = Platform.OS
 
 const url = OS == 'android' ? 'http://10.0.2.2:8080' : 'http://localhost:8080'
 const heroku = 'https://voxfm-server.herokuapp.com/'
-export const socket = io(url, {
+export const socket = io(heroku, {
     transports: ['websocket'],
     forceNew: true,
     pingInterval: 50000,
