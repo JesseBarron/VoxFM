@@ -10,7 +10,8 @@ import {
     Animated,
     Platform,
     StyleSheet,
-    ScrollView
+    ScrollView,
+    NativeEventEmitter
 } from 'react-native'
 
 import { socket } from '../clientServices'
@@ -22,6 +23,7 @@ import {
     Header,
     StreamPlayer
 } from '../component'
+import { EventEmitter } from 'eventemitter3';
 
 const URL = "http://www.indahosting.net:8128/;"
 class AppContainer extends Component {
@@ -126,6 +128,13 @@ class AppContainer extends Component {
         this.setState({playerStat: true})
         if(Platform.OS == 'ios') {
             this.registerSongUpdateListener(currentSong)
+            const pauseEvent = new NativeEventEmitter(ShoutStreamer)
+            const subscription = pauseEvent.addListener(
+                'paused',
+                (playerStat) => {
+                    this.setState({playerStat})
+                }
+            )
         }
     }
 

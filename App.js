@@ -11,12 +11,16 @@ import {
   Text,
   View
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen'
 import color from './constants/colors'
 import RootStack from './navigation'
 import { Provider } from 'react-redux'
 import store from './store'
 
 export default class App extends Component {
+  componentDidMount() {
+    SplashScreen.hide();
+  }
   render() {
     return (
       <Provider store={store}>

@@ -12,11 +12,18 @@ import AVKit
 import MediaPlayer
 
 @objc(ShoutStreamerIOS)
-class ShoutStreamerIOS: NSObject {
+class ShoutStreamerIOS: RCTEventEmitter {
+  
+//  let bridge: RCTBridge? = nil;
+  
   var streamURL: URL?;
   var streamer: AVPlayer?;
   let audioSession = AVAudioSession.sharedInstance();
   let remoteCommand = MPRemoteCommandCenter.shared();
+  
+  override func supportedEvents() -> [String]! {
+    return ["paused"]
+  }
   
   func initStreamer() -> Bool {
     do {
@@ -53,6 +60,7 @@ class ShoutStreamerIOS: NSObject {
       try self.audioSession.setActive(true)
       self.streamer = AVPlayer(url: streamURL!)
       self.streamer?.play()
+      self.sendEvent(withName: "paused", body: true)
     } catch {
       NSLog("Session Failed to Activate")
     }
@@ -60,11 +68,22 @@ class ShoutStreamerIOS: NSObject {
   
   @objc func pause() -> Void {
     self.streamer?.pause()
+    self.sendEvent(withName: "paused", body: false)
   }
   
   @objc func configInfoCenter(_ title: String = "VoxFM") -> Void {
     NSLog("Song Title for InfoCenter: %@", title)
     var nowPlayingInfo = [String: Any]()
+    if let image = UIImage(named: "VoxFMLogo2.png") {
+      if #available(iOS 10.0, *) {
+        nowPlayingInfo[MPMediaItemPropertyArtwork] =
+          MPMediaItemArtwork(boundsSize: image.size) { size in
+            return image
+        }
+      } else {
+        // Fallback on earlier versions
+      }
+    }
     nowPlayingInfo[MPMediaItemPropertyTitle] = title
     nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "VoxFM"
     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo

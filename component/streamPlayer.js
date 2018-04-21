@@ -28,8 +28,11 @@ export default StreamPlayer = ({ play, pause, isPlaying, currentSong }) => {
             {
                 (isPlaying && currentSong) &&
                 <View style={styles.songInfo}>
-                    <Text style={styles.artistName}> { `${artist} -` } </Text>                
-                    <Text style={styles.songTitle}> { `   ${song}` } </Text>
+                    {
+                        song &&
+                        <Text style={styles.songTitle}> { `${song}` } </Text>
+                    }               
+                    <Text style={styles.artistName}> { `    -  ${artist}` } </Text>
                 </View>
             }
         </View>

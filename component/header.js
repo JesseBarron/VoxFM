@@ -14,7 +14,7 @@ import { _headerStyle } from './_styles'
 
 const callStation = () => {
     const args = {
-        number: '7089291656',
+        number: '3124730689',
         prompt: true
     }
     call(args)

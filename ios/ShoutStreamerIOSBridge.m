@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+
 
 @interface RCT_EXTERN_MODULE(ShoutStreamerIOS, NSObject)
 RCT_EXTERN_METHOD(play:(NSString *)url)
