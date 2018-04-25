@@ -65,7 +65,6 @@ export default (state = initState, action) => {
 
 export const fetchFeed = (url) =>
     async dispatch => {
-        console.log(url)
         let feed = await fbFeedService.find({query:{url}})
         let action = getFeed(feed)
         dispatch(action)

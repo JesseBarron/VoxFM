@@ -3,6 +3,8 @@ package com.voxfm;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
+import org.devio.rn.splashscreen.SplashScreen;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.brentvatne.react.ReactVideoPackage;

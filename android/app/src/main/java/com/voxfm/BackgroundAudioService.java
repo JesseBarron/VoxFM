@@ -162,14 +162,14 @@ public class BackgroundAudioService extends MediaBrowserServiceCompat implements
     }
 
     private void setMediaPlaybackState(int state) {
-        PlaybackStateCompat.Builder playbackstateBuilder = new PlaybackStateCompat.Builder();
+        PlaybackStateCompat.Builder playbackStateBuilder = new PlaybackStateCompat.Builder();
         if(state == PlaybackStateCompat.STATE_PLAYING) {
-            playbackstateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PAUSE);
+            playbackStateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PAUSE);
         } else {
-            playbackstateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PLAY);
+            playbackStateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PLAY);
         }
-        playbackstateBuilder.setState(state, PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 0);
-        mMediaSessionCompat.setPlaybackState(playbackstateBuilder.build());
+        playbackStateBuilder.setState(state, PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 0);
+        mMediaSessionCompat.setPlaybackState(playbackStateBuilder.build());
     }
 
     private void showPausedNotification() {

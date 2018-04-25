@@ -44,26 +44,21 @@ class AppContainer extends Component {
     componentDidMount() {
         this.props.fetchFeed()
         this.props.fetchCurrentSong()
-            .then(currentSong => {
-                this.setState({currentSong})
-            })
+        this.registerSongUpdateListener()
         Orientation.lockToPortrait()
     }
-    registerSongUpdateListener = (currentSong) => {
+
+    registerSongUpdateListener = () => {
         const OS = Platform.OS
-        if(currentSong){
-            console.log('song Updated', currentSong)
-            ShoutStreamer.configInfoCenter(currentSong)
-        } else {
-            socket.on('streamInfo updated', (currentSong) => {
-                console.log("Socket Updated", currentSong)
-                if(OS == 'ios') {
-                    ShoutStreamer.configInfoCenter(currentSong)
-                } 
-                this.props.fetchCurrentSong(currentSong)
-            })
-        }
+        socket.on('streamInfo updated', (currentSong) => {
+            console.log("Socket Updated", currentSong)
+            if(OS == 'ios') {
+                ShoutStreamer.configInfoCenter(currentSong)
+            } 
+            this.props.fetchCurrentSong(currentSong)
+        })
     }
+
     goTo = (site) => {
         switch(site) {
             case 'twitter':
@@ -78,6 +73,7 @@ class AppContainer extends Component {
             Linking.openURL('https://somosvoxfm.com/')
         }
     }
+
     hideHead = (direction) => {
         if(direction == 'up') {
             Animated.sequence([
@@ -115,19 +111,22 @@ class AppContainer extends Component {
             ]).start()
         }
     }
+
     playVid = () => {
         this.setState({playerStat: false})
     }
+
     endVid = () => {
         this.setState({playerStat: true})
         ShoutStreamer.play(URL)
     }
+
     onPlay = () => {
         ShoutStreamer.play(URL)
-        const {currentSong} = this.props
+        // const {currentSong} = this.props
         this.setState({playerStat: true})
         if(Platform.OS == 'ios') {
-            this.registerSongUpdateListener(currentSong)
+            // this.registerSongUpdateListener(currentSong)
             const pauseEvent = new NativeEventEmitter(ShoutStreamer)
             const subscription = pauseEvent.addListener(
                 'paused',
@@ -168,7 +167,7 @@ class AppContainer extends Component {
                         play={this.onPlay}
                         pause={this.onPause}
                         isPlaying={playerStat}
-                        currentSong={currentSong}
+                        currentSong={ currentSong }
                     />
                 </View>
             </View>

@@ -11,8 +11,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: colors.headerBlack,
-        paddingTop: 20,
-        paddingBottom: 10 
+        // paddingTop: 20,
+        // paddingBottom: 10 
     },
     logoContianer: {
         flex: 1,

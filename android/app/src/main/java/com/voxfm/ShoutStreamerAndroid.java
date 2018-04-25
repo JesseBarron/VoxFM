@@ -5,7 +5,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.PowerManager;
 import android.util.Log;
-import android.support.v4.media.session.MediaSessionCompat;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -28,31 +27,37 @@ public class ShoutStreamerAndroid extends ReactContextBaseJavaModule {
             switch (focusChange) {
                 case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
                     Log.i(TAG, "AUDIOFOCUS_LOSS_TRANSIENT");
-                    pause();
+                    if(mediaPlayer != null) {
+                        mediaPlayer.pause();
+                    }
                     break;
                 case AudioManager.AUDIOFOCUS_GAIN:
                     Log.i(TAG, "AUDIOFOCUS_GAIN");
-                    try {
-                        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 9, 0);
-                        play(streamURL);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                        if(mediaPlayer != null) {
+                            mediaPlayer.setVolume(1.0f,1.0f);
+                            mediaPlayer.start();
+                        }
                     break;
                 case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
                     Log.i(TAG, "AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK");
-                    mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, 0);
+                    if(mediaPlayer != null) {
+                        mediaPlayer.setVolume(0.3f, 0.3f);
+                    }
                     break;
                 case AudioManager.AUDIOFOCUS_LOSS:
                     Log.i(TAG, "AUDIOFOCUS_LOSS");
-                    mediaPlayer.pause();
+                    if(mediaPlayer != null) {
+                        mediaPlayer.pause();
+                    }
                     break;
                 default:
                     Log.i(TAG, "onAudioFocusChange: Default Happened");
             }
         }
     };
+    // NEW STUFF HERE SO YOU WHAT TO DELETE
 
+    // END OF NEW STUFF ~~~//~~~~//~~~//~~~//~~~//~~~//
     public ShoutStreamerAndroid(ReactApplicationContext reactContext) {
         super(reactContext);
         Log.v("AudioService", "This is the audio service");

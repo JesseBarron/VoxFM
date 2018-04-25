@@ -11,6 +11,5 @@ export default styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         backgroundColor: colors.yellow,
-        // top: Platform.OS == 'ios' ? 20 : 0
     }
 })
