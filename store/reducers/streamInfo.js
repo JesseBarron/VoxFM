@@ -6,7 +6,10 @@ import {
     voxInfoService
 } from '../../clientServices'
 
-
+const initState = {
+    currentSong: 'VoxFM',
+    artwork: null
+}
 /**
  * ACTIONS
  */
@@ -32,7 +35,7 @@ const reducerMethod = {
     }
 }
 
-export default (state = 'VoxFM', action) => {
+export default (state = initState, action) => {
     if (reducerMethod[action.type]) {
         return reducerMethod[action.type](state, action)
     }
@@ -46,6 +49,7 @@ export const fetchCurrentSong = (currentSong) =>
     async dispatch => {
         try{
             let currentSong = currentSong || await voxInfoService.find()
+            console.log(currentSong)
             let action = getCurrentSong(currentSong)
             dispatch(action)
             return currentSong
@@ -53,9 +57,3 @@ export const fetchCurrentSong = (currentSong) =>
             console.error(e)
         }
     }
-
-// export const listenForSongUpdate = () => {
-//     const OS = Platform.OS
-//     console.log('registered listener')
-    
-// }

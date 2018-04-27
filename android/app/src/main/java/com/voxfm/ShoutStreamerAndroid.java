@@ -55,9 +55,6 @@ public class ShoutStreamerAndroid extends ReactContextBaseJavaModule {
             }
         }
     };
-    // NEW STUFF HERE SO YOU WHAT TO DELETE
-
-    // END OF NEW STUFF ~~~//~~~~//~~~//~~~//~~~//~~~//
     public ShoutStreamerAndroid(ReactApplicationContext reactContext) {
         super(reactContext);
         Log.v("AudioService", "This is the audio service");
@@ -73,7 +70,7 @@ public class ShoutStreamerAndroid extends ReactContextBaseJavaModule {
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             if (this.mediaPlayer == null) {
                 this.mediaPlayer = new MediaPlayer();
-                this.mediaPlayer.setWakeMode(getReactApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
+//                this.mediaPlayer.setWakeMode(getReactApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
                 this.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 this.mediaPlayer.setDataSource(this.streamURL);
                 this.mediaPlayer.prepareAsync();

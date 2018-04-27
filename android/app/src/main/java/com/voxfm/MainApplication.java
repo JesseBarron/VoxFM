@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 
+import com.tanguyantoine.react.MusicControl;
 import org.devio.rn.splashscreen.SplashScreen;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.github.yamill.orientation.OrientationPackage;
@@ -33,7 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
                     new ShoutStreamerAndroidPackager(),
                     new OrientationPackage(),
                     new ReactVideoPackage(),
-                    new VectorIconsPackage()
+                    new VectorIconsPackage(),
+                    new MusicControl()
             );
         }
 

@@ -2,6 +2,7 @@ import React,{ Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Orientation from 'react-native-orientation'
+import MusicControl from 'react-native-music-control'
 import {
     View,
     Text,
@@ -42,20 +43,59 @@ class AppContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchFeed()
-        this.props.fetchCurrentSong()
-        this.registerSongUpdateListener()
-        Orientation.lockToPortrait()
+        try {
+            this.props.fetchFeed()
+            this.props.fetchCurrentSong()
+            this.registerSongUpdateListener()
+            this.setMusicControlInfo()
+            Orientation.lockToPortrait()
+
+        } catch(e) {
+            console.log(e)
+        }
     }
 
-    registerSongUpdateListener = () => {
+    setMusicControlInfo = () => {
+        const currentSong = this.props.currentSong.split(' - ')
+        const artist = currentSong[0]
+        const song = currentSong[1]
+        const artwork = this.props.artwork
+
+        MusicControl.setNowPlaying({
+            title: song || 'VoxFM',
+            artwork: artwork || require('../assets/VoxFMLogo-BLK.png'),
+            artist: artist || 'VoxFM',
+            album: 'Estas Escuchando VoxFM'
+        })
+    }
+
+    configMusicControls = () => {
+        MusicControl.enableBackgroundMode(true)
+        if(Platform.OS == 'ios') MusicControl.handleAudioInterruptions(true)
+        MusicControl.enableControl('play', true)
+        MusicControl.enableControl('pause', true)
+        MusicControl.on('play', () => {
+            this.onPlay()
+        })
+        MusicControl.on('pause', () => {
+            this.onPause()
+        })
+        MusicControl.on('closeNotification', () => {
+            this.onPause()
+        })
+    }
+
+    registerSongUpdateListener =  () => {
         const OS = Platform.OS
-        socket.on('streamInfo updated', (currentSong) => {
-            console.log("Socket Updated", currentSong)
-            if(OS == 'ios') {
-                ShoutStreamer.configInfoCenter(currentSong)
-            } 
-            this.props.fetchCurrentSong(currentSong)
+        console.log('register likstener')
+        socket.on('streamInfo updated', async ({ currentSong, artwork }) => {
+            try {
+                await this.props.fetchCurrentSong({currentSong, artwork})
+                this.setMusicControlInfo()
+
+            } catch(e) {
+                console.log(e)
+            }
         })
     }
 
@@ -123,27 +163,24 @@ class AppContainer extends Component {
 
     onPlay = () => {
         ShoutStreamer.play(URL)
-        // const {currentSong} = this.props
         this.setState({playerStat: true})
-        if(Platform.OS == 'ios') {
-            // this.registerSongUpdateListener(currentSong)
-            const pauseEvent = new NativeEventEmitter(ShoutStreamer)
-            const subscription = pauseEvent.addListener(
-                'paused',
-                (playerStat) => {
-                    this.setState({playerStat})
-                }
-            )
-        }
+        this.setMusicControlInfo()
+        this.configMusicControls()
+        MusicControl.updatePlayback({
+            state: MusicControl.STATE_BUFFERING,
+        })     
     }
 
     onPause = () => {
         ShoutStreamer.pause()
+        MusicControl.updatePlayback({
+            state: MusicControl.STATE_PAUSED
+        })   
         this.setState({ playerStat: false })
     }
     
     render() {
-        const {feed, nextPage, navigation, currentSong } = this.props
+        const {feed, nextPage, navigation, currentSong, artwork } = this.props
         const { playerStat } = this.state
         const OS = Platform.OS
         return(
@@ -180,7 +217,8 @@ const styles = _AppContainerStyle
 const mapState = ({fbFeed, currentSong}) => ({
     feed: fbFeed.feed,
     nextPage: fbFeed.nextPage,
-    currentSong
+    currentSong: currentSong.currentSong, //Naming needs to change
+    artwork: currentSong.artwork
 })
 
 const mapDispatch = (dispatch) => ({
