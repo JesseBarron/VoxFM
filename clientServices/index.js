@@ -7,11 +7,11 @@ const OS = Platform.OS
 
 const url = OS == 'android' ? 'http://10.0.2.2:8080' : 'http://localhost:8080'
 const heroku = 'https://voxfm-server.herokuapp.com/'
-export const socket = io(heroku, {
+export const socket = io(url, {
     transports: ['websocket'],
-    forceNew: true,
-    pingInterval: 50000,
-    pingTimeout: 50000
+    // forceNew: true,
+    pingInterval: 3000,
+    pingTimeout: 5000
 })
 
 const client = feathers()

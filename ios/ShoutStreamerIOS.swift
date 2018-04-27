@@ -25,16 +25,17 @@ class ShoutStreamerIOS: RCTEventEmitter {
     return ["paused"]
   }
   
+  //Initializes the audioSession as well as the transports
   func initStreamer() -> Bool {
     do {
       try audioSession.setCategory(AVAudioSessionCategoryPlayback)
       
-      self.configRemote()
-      self.configInfoCenter()
-      let infoCenter = MPNowPlayingInfoCenter.default()
-      infoCenter.nowPlayingInfo = [
-        MPMediaItemPropertyTitle: "VoxFM"
-      ]
+//      self.configRemote()
+//      self.configInfoCenter()
+//      let infoCenter = MPNowPlayingInfoCenter.default()
+//      infoCenter.nowPlayingInfo = [
+//        MPMediaItemPropertyTitle: "VoxFM"
+//      ]
       return true
     } catch {
       NSLog("Could not Set Audio Session Category")
@@ -47,6 +48,7 @@ class ShoutStreamerIOS: RCTEventEmitter {
     self.streamURL = stationURL!;
   }
   
+  //React Method to Start the player
   @objc func play(_ url: String) -> Void {
     NSLog("This is the URL: %@", url)
     if initStreamer() {
@@ -65,12 +67,13 @@ class ShoutStreamerIOS: RCTEventEmitter {
       NSLog("Session Failed to Activate")
     }
   }
-  
+  //React Method to Pause the player
   @objc func pause() -> Void {
     self.streamer?.pause()
     self.sendEvent(withName: "paused", body: false)
   }
   
+  //React Method to update the fields in the transport
   @objc func configInfoCenter(_ title: String = "VoxFM") -> Void {
     NSLog("Song Title for InfoCenter: %@", title)
     var nowPlayingInfo = [String: Any]()
@@ -89,6 +92,7 @@ class ShoutStreamerIOS: RCTEventEmitter {
     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
   
+  //Configure the remote's commands
   func configRemote() -> Void {
     remoteCommand.playCommand.addTarget(self, action: #selector(self.playStream))
     remoteCommand.pauseCommand.addTarget(self, action: #selector(self.pause))

@@ -4492,6 +4492,10 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-music-control@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/react-native-music-control/-/react-native-music-control-0.5.4.tgz#ec00236e4dccf444ccdc5f1cd003507f5d6b3feb"
+
 react-native-orientation@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/react-native-orientation/-/react-native-orientation-3.1.3.tgz#d45803841fe94b6cce9acbe904fd5ca191a3711e"
