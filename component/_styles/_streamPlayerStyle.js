@@ -14,6 +14,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0, 0.9)',
     },
+    pauseButton: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
     songInfo: {
         marginLeft: 10
     },

@@ -9,17 +9,22 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-export default StreamPlayer = ({ play, pause, isPlaying, currentSong }) => {
+export default StreamPlayer = ({ play, pause, isPlaying, currentSong, toggleNowPlaying }) => {
         const splitSong = currentSong.split(' - ')
         const [artist, song] = splitSong
     return(
         <View style={styles.container}>
-            <View style={styles.button}>
+            <View>
                 {
                     isPlaying 
-                    ?<TouchableOpacity onPress={pause} >
-                        <Icon name="pause-circle-outline" size={50} color={color.backgroundGrey} />
-                    </TouchableOpacity>
+                    ?<View style={styles.pauseButton}>
+                        <TouchableOpacity onPress={() => toggleNowPlaying(true)} >
+                            <Icon name="arrow-drop-up" size={40} color={color.backgroundGrey} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={pause} >
+                            <Icon name="pause-circle-outline" size={50} color={color.backgroundGrey} />
+                        </TouchableOpacity>
+                    </View>
                     :<TouchableOpacity onPress={play} >
                         <Icon name="play-circle-outline" size={50} color={color.backgroundGrey} />
                     </TouchableOpacity>

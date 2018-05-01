@@ -22,9 +22,10 @@ import { fetchFeed, fetchCurrentSong } from '../store'
 import {
     Feed,
     Header,
-    StreamPlayer
+    StreamPlayer,
+    NowPlaying,
+    nowPlaying
 } from '../component'
-import { EventEmitter } from 'eventemitter3';
 
 const URL = "http://www.indahosting.net:8128/;"
 class AppContainer extends Component {
@@ -34,7 +35,9 @@ class AppContainer extends Component {
             playerStat: false,
             slide: new Animated.Value(2),
             fade: new Animated.Value(1),
-            currentSong: 'VoxFM'
+            currentSong: 'VoxFM',
+            showModal: false,
+            showPlayer: new Animated.Value(.9)
         }
     }
 
@@ -98,7 +101,7 @@ class AppContainer extends Component {
             }
         })
     }
-
+    //Move this to the Header Component
     goTo = (site) => {
         switch(site) {
             case 'twitter':
@@ -113,7 +116,7 @@ class AppContainer extends Component {
             Linking.openURL('https://somosvoxfm.com/')
         }
     }
-
+    //Move this to the Header Component
     hideHead = (direction) => {
         if(direction == 'up') {
             Animated.sequence([
@@ -152,6 +155,7 @@ class AppContainer extends Component {
         }
     }
 
+    //These Can Stay here
     playVid = () => {
         this.setState({playerStat: false})
     }
@@ -178,7 +182,32 @@ class AppContainer extends Component {
         })   
         this.setState({ playerStat: false })
     }
-    
+
+    toggleNowPlaying = (showModal) => {
+        let direction = showModal ? 'up' : 'down'
+        this.hideHead(direction)
+        this.togglePlayer(showModal)
+        this.setState({ showModal })
+    }
+
+    togglePlayer = (showPlayer) => {
+        if(showPlayer) {
+            Animated.timing(
+                this.state.showPlayer,
+                {
+                    toValue: 0,
+                    duration: 600
+            }).start()
+        } else {
+            Animated.timing(
+                this.state.showPlayer,
+                {
+                    toValue: .9,
+                    duration: 1000
+            }).start()
+        }
+    }
+
     render() {
         const {feed, nextPage, navigation, currentSong, artwork } = this.props
         const { playerStat } = this.state
@@ -199,14 +228,24 @@ class AppContainer extends Component {
                             isPlaying={playerStat}
                         />
                 </View>
-                <View style={{flex: 1.3}} >
+                <Animated.View style={{flex: this.state.showPlayer}} >
                     <StreamPlayer 
                         play={this.onPlay}
                         pause={this.onPause}
+                        toggleNowPlaying={this.toggleNowPlaying}
                         isPlaying={playerStat}
                         currentSong={ currentSong }
                     />
-                </View>
+                </Animated.View>
+                <NowPlaying 
+                    show={this.state.showModal}
+                    toggleNowPlaying={this.toggleNowPlaying}
+                    play={this.onPlay}
+                    pause={this.onPause}
+                    isPlaying={playerStat}
+                >
+                    <Header goTo={this.goTo}/>
+                </NowPlaying>
             </View>
         )
     }
