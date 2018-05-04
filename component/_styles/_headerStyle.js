@@ -31,7 +31,7 @@ export default StyleSheet.create({
     },
     callBttn: {
         right: 5,
-        margin: 2,
+        margin: 10,
         padding: 5,
         backgroundColor: colors.yellow,
         borderRadius: 70, 

@@ -21,20 +21,26 @@ const callStation = () => {
         .catch(console.err)
 }
 
-export default Header = ({goTo}) => {
+export default Header = (props) => {
+    const { goTo, navigation } = props
     return(
         <View style={styles.container}>
-                <TouchableOpacity style={styles.logoContianer} onPress={() => goTo('voxfm')}  >
-                    <Image
-                        source={require('../assets/voxfmImage_Alpha.png')}
-                        style={styles.logo}
-                        resizeMode={'contain'}
-                    />
-                </TouchableOpacity>
+            <TouchableOpacity style={styles.logoContianer} onPress={() => goTo('voxfm')}  >
+                <Image
+                    source={require('../assets/voxfmImage_Alpha.png')}
+                    style={styles.logo}
+                    resizeMode={'contain'}
+                />
+            </TouchableOpacity>
             <View style={styles.socials}>
-                <TouchableOpacity style={styles.callBttn} onPress={() => callStation()} >
-                    <Icon name="phone-call" color={colors.headerBlack}  size={30} />
-                </TouchableOpacity>
+                <View style={{display: 'flex', flexDirection: 'row'}}>
+                    <TouchableOpacity style={styles.callBttn} onPress={() => callStation()} >
+                        <Icon name="phone-call" color={colors.headerBlack}  size={30} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.callBttn} onPress={() => navigation.navigate('ContactForm')} >
+                        <Icon name="mail" color={colors.headerBlack}  size={30} />
+                    </TouchableOpacity>
+                </View>
                 <SocialBttns goTo={goTo}/>
             </View>
         </View>

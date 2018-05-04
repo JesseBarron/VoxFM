@@ -7,11 +7,11 @@ import {
 } from '../screens'
 
 const stack = {
-    ContactForm: {
-        screen: ContactForm,
-    },
     Home: {
         screen: AppContainer
+    },
+    ContactForm: {
+        screen: ContactForm,
     },
     VideoPlayer: {
         screen: VideoPlayerComponent

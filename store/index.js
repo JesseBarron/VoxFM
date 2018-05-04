@@ -9,3 +9,4 @@ export default store = createStore(rootReducer, middleware)
 
 export * from './reducers/facebookFeed'
 export * from './reducers/streamInfo'
+export * from './reducers/streamURL'

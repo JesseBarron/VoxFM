@@ -18,7 +18,7 @@ import {
 import { socket } from '../clientServices'
 import { ShoutStreamer } from '../utility'
 import { _AppContainerStyle } from './_styles'
-import { fetchFeed, fetchCurrentSong } from '../store'
+import { fetchFeed, fetchCurrentSong, fetchStreamURL } from '../store'
 import {
     Feed,
     Header,
@@ -27,7 +27,7 @@ import {
     nowPlaying
 } from '../component'
 
-const URL = "http://www.indahosting.net:8128/;"
+// const URL = "http://www.indahosting.net:8128/;"
 class AppContainer extends Component {
     constructor() {
         super()
@@ -47,8 +47,7 @@ class AppContainer extends Component {
 
     componentDidMount() {
         try {
-            this.props.fetchFeed()
-            this.props.fetchCurrentSong()
+            this.props.fetchInitData()
             this.registerSongUpdateListener()
             this.setMusicControlInfo()
             Orientation.lockToPortrait()
@@ -93,7 +92,7 @@ class AppContainer extends Component {
         console.log('register likstener')
         socket.on('streamInfo updated', async ({ currentSong, artwork }) => {
             try {
-                await this.props.fetchCurrentSong({currentSong, artwork})
+                await this.props.dispatchCurrentSong({currentSong, artwork})
                 this.setMusicControlInfo()
 
             } catch(e) {
@@ -166,7 +165,7 @@ class AppContainer extends Component {
     }
 
     onPlay = () => {
-        ShoutStreamer.play(URL)
+        ShoutStreamer.play(this.props.streamURL)
         this.setState({playerStat: true})
         this.setMusicControlInfo()
         this.configMusicControls()
@@ -216,7 +215,7 @@ class AppContainer extends Component {
             <View style={styles.container}>
                 <Animated.View style={{flex: this.state.slide, opacity: this.state.slide}}>
                     <View style={{flex: 1}}>
-                        <Header goTo={this.goTo}/>
+                        <Header goTo={this.goTo} navigation={navigation}/>
                     </View>
                 </Animated.View>
                 <View style={{flex: OS == 'ios' ? 8 : 10}} >
@@ -244,7 +243,7 @@ class AppContainer extends Component {
                     pause={this.onPause}
                     isPlaying={playerStat}
                 >
-                    <Header goTo={this.goTo}/>
+                    <Header goTo={this.goTo} navigation={navigation}/>
                 </NowPlaying>
             </View>
         )
@@ -253,22 +252,32 @@ class AppContainer extends Component {
 
 const styles = _AppContainerStyle
 
-const mapState = ({fbFeed, currentSong}) => ({
+const mapState = ({fbFeed, currentSong, streamURL}) => ({
     feed: fbFeed.feed,
     nextPage: fbFeed.nextPage,
     currentSong: currentSong.currentSong, //Naming needs to change
-    artwork: currentSong.artwork
+    artwork: currentSong.artwork,
+    streamURL
 })
 
 const mapDispatch = (dispatch) => ({
-   async fetchFeed(url) {
+    async fetchInitData() {
+        this.dispatchFeed()
+        this.dispatchCurrentSong()
+        this.dispatchStreamURL()
+    },
+   async dispatchFeed(url) {
         let action = fetchFeed(url)
         return dispatch(action)
     },
-   async fetchCurrentSong() {
+   async dispatchCurrentSong() {
         let action = fetchCurrentSong()
         return dispatch(action)
     },
+    async dispatchStreamURL() {
+        let action = fetchStreamURL()
+        return dispatch(action)
+    }
 })
 
 export default connect(mapState, mapDispatch)(AppContainer)
