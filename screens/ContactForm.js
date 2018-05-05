@@ -29,7 +29,7 @@ export default class ContactForm extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            topic: '',
+            topic: 'General',
             subject: '',
             message: '',
             disableButton: true,

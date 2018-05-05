@@ -36,7 +36,8 @@ export default Form = ({firstName, lastName, email, subject, message, handleInpu
             </View>
             <View style={styles.emailContainer}>
                 <Text style={styles.label} >Correo Electrónico:</Text>                    
-                <TextInput 
+                <TextInput
+                    underlineColorAndroid={colors.headerBlack}
                     onChangeText={(text) => handleInputChange(text, 'email')} 
                     style={[styles.input, styles[validEmail]]}
                     value={email}
@@ -50,6 +51,7 @@ export default Form = ({firstName, lastName, email, subject, message, handleInpu
                     onValueChange={(value) => handleTopic(value)}
                     style={styles.input}
                     iosBoxStyle={{backgroundColor: colors.blue}}
+                    androidBoxStyle={{backgroundColor: colors.blue}}
                     label={topic || "Seleccione un departamento"}
                     arrowColor="black"
                 >

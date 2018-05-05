@@ -23,7 +23,14 @@ export default StyleSheet.create({
         width: '100%'
     },
     input: {
-        height: 30,
+        ...Platform.select({
+            ios: {
+                height: 30
+            },
+            android: {
+                height: 50
+            }
+        }),
         borderColor: colors.backgroundGrey,
         borderWidth: 1,
         margin: 5,

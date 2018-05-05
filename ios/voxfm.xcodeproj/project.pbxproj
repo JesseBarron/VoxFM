@@ -928,7 +928,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 94MZ4EE6N8;
+						DevelopmentTeam = 38H7V492WB;
 						LastSwiftMigration = 930;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1596,7 +1596,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 94MZ4EE6N8;
+				DEVELOPMENT_TEAM = 38H7V492WB;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1612,7 +1612,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.somosvoxfm.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.somosvoxfm;
 				PRODUCT_NAME = voxfm;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1631,7 +1631,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 94MZ4EE6N8;
+				DEVELOPMENT_TEAM = 38H7V492WB;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1647,7 +1647,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.somosvoxfm.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.somosvoxfm;
 				PRODUCT_NAME = voxfm;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

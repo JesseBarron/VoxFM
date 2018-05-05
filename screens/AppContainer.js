@@ -107,7 +107,7 @@ class AppContainer extends Component {
             Linking.openURL('https://twitter.com/vox94radio?lang=es')
             break;
             case 'facebook':
-            Linking.openURL('https://www.facebook.com/somosvoxfm/')
+            Linking.openURL('fb://page/?id=359743347745536')
             break;
             case 'instagram':
             Linking.openURL('https://www.instagram.com/vox94radio/')
