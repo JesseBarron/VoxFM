@@ -1,6 +1,6 @@
 # Vox FM Radio
 
-An application commissioned by an online radio Station [VoxFM](www.somosvoxfm.com).
+An application commissioned by an online radio Station [VoxFM](https://somosvoxfm.com/).
 The application was mainly built using React-Native, though native modules were also implemented using swift and java in order
 to play the ShoutCast stream on the device, both actively and in the background.
 
