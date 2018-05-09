@@ -1,4 +1,4 @@
-# VoxFM
+# Vox FM Radio
 
 An application commissioned by an online radio Station [VoxFM](www.somosvoxfm.com).
 The application was mainly built using React-Native, though native modules were also implemented using swift and java in order
