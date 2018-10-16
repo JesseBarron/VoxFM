@@ -1,7 +1,3 @@
-import { Platform } from 'react-native'
-import _ from 'lodash'
-import {ShoutStreamer} from '../../utility'
-import { socket } from '../../clientServices'
 import {
     voxInfoService
 } from '../../clientServices'

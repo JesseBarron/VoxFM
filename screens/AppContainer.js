@@ -27,7 +27,7 @@ import {
     nowPlaying
 } from '../component'
 
-// const URL = "http://www.indahosting.net:8128/;"
+
 class AppContainer extends Component {
     constructor() {
         super()
@@ -89,10 +89,9 @@ class AppContainer extends Component {
 
     registerSongUpdateListener =  () => {
         const OS = Platform.OS
-        console.log('register likstener')
         socket.on('streamInfo updated', async ({ currentSong, artwork }) => {
             try {
-                await this.props.dispatchCurrentSong({currentSong, artwork})
+                await this.props.dispatchCurrentSong({currentSong, artwork}) //Changes the current song in the redux store
                 this.setMusicControlInfo()
 
             } catch(e) {
@@ -100,6 +99,7 @@ class AppContainer extends Component {
             }
         })
     }
+
     //Move this to the Header Component
     goTo = (site) => {
         switch(site) {
@@ -107,7 +107,7 @@ class AppContainer extends Component {
             Linking.openURL('https://twitter.com/vox94radio?lang=es')
             break;
             case 'facebook':
-            Linking.openURL('fb://page/?id=359743347745536')
+            Linking.openURL('https://www.facebook.com/somosvoxfm/')
             break;
             case 'instagram':
             Linking.openURL('https://www.instagram.com/vox94radio/')
@@ -115,6 +115,7 @@ class AppContainer extends Component {
             Linking.openURL('https://somosvoxfm.com/')
         }
     }
+
     //Move this to the Header Component
     hideHead = (direction) => {
         if(direction == 'up') {

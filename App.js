@@ -19,7 +19,9 @@ import store from './store'
 
 export default class App extends Component {
   componentDidMount() {
-    SplashScreen.hide();
+    if(Platform.OS == 'ios') {
+      SplashScreen.hide();
+    }
   }
   render() {
     return (
